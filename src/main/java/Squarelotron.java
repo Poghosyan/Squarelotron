@@ -2,13 +2,14 @@ public class Squarelotron {
     private int[][] squarelotron;
 
     private int size;
+
     public Squarelotron(int n) {
         squarelotron = new int[n][n];
         size = n;
 
         for (int i = 0; i < n; ++i) {
             for (int j = 0; j < n; ++j) {
-                squarelotron[i][j] = i*n + j + 1;
+                squarelotron[i][j] = i * n + j + 1;
             }
         }
     }
