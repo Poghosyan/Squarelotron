@@ -14,11 +14,23 @@ public class Squarelotron {
         }
     }
 
+    public Squarelotron(int[][] sq, int size) {
+        squarelotron = sq;
+        this.size = size;
+    }
+
     public Squarelotron upsideDownFlip(int ring) {
-        return new Squarelotron(0);
+        int [][] result = squarelotron;
+        for (int i = 0; i < size; ++i) {
+            for (int j = size - 1, k = 0; k < size; --j, ++k) {
+                result[i][k] = squarelotron[i][j];
+            }
+        }
+        return new Squarelotron(result, size);
     }
 
     public Squarelotron mainDiagonalFlip(int ring) {
+
         return new Squarelotron(0);
     }
 
