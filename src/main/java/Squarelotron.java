@@ -32,8 +32,13 @@ public class Squarelotron {
     }
 
     public Squarelotron mainDiagonalFlip(int ring) {
-
-        return new Squarelotron(0);
+        int [][] result = squarelotron;
+        for (int i = 0; i) {
+            for () {
+                result[][] = squarelotron[][];
+            }
+        }
+        return new Squarelotron(result, size);
     }
 
     public void rotateRight(int numberOfTurns) {
