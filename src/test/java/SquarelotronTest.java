@@ -60,11 +60,11 @@ public class SquarelotronTest {
 
     private void checkUpsideDownFlip(int ringLimit, Squarelotron squarelotron, int size) {
         for (int ringNumber = 1; ringNumber < ringLimit; ++ringNumber) {
-            squarelotron.upsideDownFlip(ringNumber);
+            int [][] result = squarelotron.upsideDownFlip(ringNumber).getSquarelotron();
             for (int i = 0; i < size; ++i) {
                 for (int j = 0; j < size; ++j) {
-                    if ((j >= ringNumber - 1 || j <= size - ringNumber) && (i >= ringNumber || i <= size - ringNumber)) {
-                        assertEquals((size - i - 1) * size + j + 1, squarelotron.getSquarelotron()[i][j]);
+                    if ((j <= ringNumber - 1 || j >= size - ringNumber) && (i >= ringNumber || i <= size - ringNumber)) {
+                        assertEquals("Ring # " + ringNumber + " Size: " + size, (size - i - 1) * size + j + 1, result[i][j]);
                     }
                 }
             }

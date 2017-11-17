@@ -22,20 +22,34 @@ public class Squarelotron {
     }
 
     public Squarelotron upsideDownFlip(int ring) {
-        int [][] result = squarelotron;
-        for (int i = 0; i < size; ++i) {
-            for (int j = size - 1, k = 0; k < size; --j, ++k) {
-                result[i][k] = squarelotron[i][j];
+        int[][] result = new int[size][size];
+        int ringAdjust = ring - 1;
+        for (int i = ringAdjust; i < size - ringAdjust; ++i) {
+            for (int j = size - 1 - ringAdjust, k = ringAdjust; k < size - ringAdjust; --j, ++k) {
+                if (i < ring || i >= size - ring) {
+                    result[k][i] = squarelotron[j][i];
+                } else if (k < ring || k >= size - ring) {
+                    result[k][i] = squarelotron[j][i];
+                } else {
+                    result[i][k] = squarelotron[i][k];
+                }
             }
         }
         return new Squarelotron(result, size);
     }
 
     public Squarelotron mainDiagonalFlip(int ring) {
-        int [][] result = squarelotron;
-        for (int i = 0; i) {
-            for () {
-                result[][] = squarelotron[][];
+        int[][] result = new int[size][size];
+        int ringAdjust = ring - 1;
+        for (int i = 0; i < size; ++i) {
+            for (int j = 0; j < size; ++j) {
+                if (i < ring || i >= size - ring) {
+                    result[i][j] = squarelotron[j][i];
+                } else if (j < ring || j >= size - ring) {
+                    result[i][j] = squarelotron[j][i];
+                } else {
+                    result[i][j] = squarelotron[i][j];
+                }
             }
         }
         return new Squarelotron(result, size);
