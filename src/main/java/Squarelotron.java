@@ -24,8 +24,8 @@ public class Squarelotron {
     public Squarelotron upsideDownFlip(int ring) {
         int[][] result = new int[size][size];
         int ringAdjust = ring - 1;
-        for (int i = ringAdjust; i < size - ringAdjust; ++i) {
-            for (int j = size - 1 - ringAdjust, k = ringAdjust; k < size - ringAdjust; --j, ++k) {
+        for (int i = 0; i < size; ++i) {
+            for (int j = size - 1, k = 0; k < size; --j, ++k) {
                 if (i < ring || i >= size - ring) {
                     result[k][i] = squarelotron[j][i];
                 } else if (k < ring || k >= size - ring) {
@@ -38,14 +38,16 @@ public class Squarelotron {
         return new Squarelotron(result, size);
     }
 
+    /* Cases:
+       1. In diagonal
+       2. In ring touch it
+       3. Not in ring
+     */
     public Squarelotron mainDiagonalFlip(int ring) {
         int[][] result = new int[size][size];
-        int ringAdjust = ring - 1;
         for (int i = 0; i < size; ++i) {
             for (int j = 0; j < size; ++j) {
-                if (i < ring || i >= size - ring) {
-                    result[i][j] = squarelotron[j][i];
-                } else if (j < ring || j >= size - ring) {
+                if ((i >= ring - 1 && i <= size - ring) && (j >= ring - 1 && j <= size - ring)) {
                     result[i][j] = squarelotron[j][i];
                 } else {
                     result[i][j] = squarelotron[i][j];

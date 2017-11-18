@@ -13,7 +13,7 @@ public class SquarelotronTest {
             Squarelotron squarelotron = new Squarelotron(i);
             int size = squarelotron.getSize();
             int ringLimit = (int) Math.ceil((double) squarelotron.getSize() / 2.0);
-            for (int ring = 1; ring < ringLimit; ++ring) {
+            for (int ring = 1; ring <= ringLimit; ++ring) {
                 squarelotron.upsideDownFlip(ring);
                 checkUpsideDownFlip(ringLimit, squarelotron, size);
             }
@@ -22,16 +22,19 @@ public class SquarelotronTest {
 
     @Test
     public void mainDiagonalFlip() throws Exception {
-        for (int k = 1; k < MAX_SQUARELOTRON_DIMENSION; ++k) {
+        int [][] result;
+        for (int k = 3; k < MAX_SQUARELOTRON_DIMENSION; ++k) {
             Squarelotron squarelotron = new Squarelotron(k);
             int size = squarelotron.getSize();
             int ringLimit = (int) Math.ceil((double) squarelotron.getSize() / 2.0);
-            for (int ringNumber = 1; ringNumber < ringLimit; ++ringNumber) {
-                squarelotron.mainDiagonalFlip(ringNumber);
+
+            for (int ringNumber = 1; ringNumber <= ringLimit; ++ringNumber) {
+                result = squarelotron.mainDiagonalFlip(ringNumber).getSquarelotron();
                 for (int i = 0; i < size; ++i) {
+
                     for (int j = 0; j < size; ++j) {
-                        if ((j >= ringNumber - 1 || j <= size - ringNumber) && (i >= ringNumber || i <= size - ringNumber)) {
-                            assertEquals(i * size + j + 1, squarelotron.getSquarelotron()[j][i]);
+                        if ((j < ringNumber || j >= size - ringNumber) && (i < ringNumber || i >= size - ringNumber)) {
+                            assertEquals("Ring # " + ringNumber + " Size: " + size, i * size + j + 1, result[j][i]);
                         }
                     }
                 }
@@ -63,7 +66,7 @@ public class SquarelotronTest {
             int [][] result = squarelotron.upsideDownFlip(ringNumber).getSquarelotron();
             for (int i = 0; i < size; ++i) {
                 for (int j = 0; j < size; ++j) {
-                    if ((j <= ringNumber - 1 || j >= size - ringNumber) && (i >= ringNumber || i <= size - ringNumber)) {
+                    if ((j <= ringNumber - 1 || j >= size - ringNumber) && (i <= ringNumber || i <= size - ringNumber)) {
                         assertEquals("Ring # " + ringNumber + " Size: " + size, (size - i - 1) * size + j + 1, result[i][j]);
                     }
                 }
