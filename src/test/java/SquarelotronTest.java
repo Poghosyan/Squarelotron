@@ -42,17 +42,19 @@ public class SquarelotronTest {
         }
     }
 
+    //TODO Fix test for both clockwise and counterclockwise rotations
     @Test
     public void rotateRight() throws Exception {
         for (int k = 1; k < MAX_SQUARELOTRON_DIMENSION; ++k) {
-            Squarelotron squarelotron = new Squarelotron(k);
-            int size = squarelotron.getSize();
-            int ringLimit = (int) Math.ceil((double) squarelotron.getSize() / 2.0);
-            for (int ringNumber = 1; ringNumber < ringLimit; ++ringNumber) {
-                squarelotron.rotateRight(1);
+            Squarelotron clockwise = new Squarelotron(k);
+            Squarelotron counterCloclwise = new Squarelotron(k);
+            int size = clockwise.getSize();
+            for (int turns = 1; turns <= Squarelotron.MAX_TURN; ++turns) {
+                clockwise.rotateRight(turns);
+                counterCloclwise.rotateRight(-turns);
                 for (int i = size - 1; i > -1; --i) {
                     for (int j = 0; j < size; ++j) {
-                        assertEquals((size - 1 - i) * size + j + 1, squarelotron.getSquarelotron()[i][j]);
+                        assertEquals((size - 1 - i) * size + j + 1, clockwise.getSquarelotron()[i][j]);
                     }
                 }
             }

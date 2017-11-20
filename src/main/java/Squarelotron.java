@@ -1,7 +1,7 @@
 //Given a string s find the alphabetically last substring in the alphabetically ordered set of substrings of s
 
 public class Squarelotron {
-    private final int MAX_TURN = 4;
+    public static final int MAX_TURN = 4;
     private int[][] squarelotron;
 
     private int size;
@@ -39,31 +39,31 @@ public class Squarelotron {
         return new Squarelotron(result, size);
     }
 
-    //TODO This doesnt work for inner rings, fix it
     public void rotateRight(int numberOfTurns) {
         int trueTurns = numberOfTurns % MAX_TURN;
         int ringLimit = (int) Math.ceil((double) size / 2.0);
         int [] topRow, rightColumn, bottomRow, leftColumn;
-        for (int turn = 0; turn < trueTurns; ++turn) {
-            for (int i = 1; i <= ringLimit; ++i) {
-                topRow = new int[size - (2 * (i - 1))];
-                rightColumn = new int[size - (2 * (i - 1))];
-                bottomRow = new int[size - (2 * (i - 1))];
-                leftColumn = new int[size - (2 * (i - 1))];
 
-                for (int j = 0; j < size; ++j) {
-                    topRow[j] = squarelotron[i - 1][j];
-                    leftColumn[j] = squarelotron[j][i - 1];
-                    bottomRow[j] = squarelotron[size - i][j];
-                    rightColumn[j] = squarelotron[j][size - i];
+        for (int turn = 0; turn < trueTurns; ++turn) {
+            for (int ring = 1; ring <= ringLimit; ++ring) {
+                int ringLength = size - (2 * (ring - 1));
+                topRow = new int[ringLength];
+                rightColumn = new int[ringLength];
+                bottomRow = new int[ringLength];
+                leftColumn = new int[ringLength];
+
+                for (int  start = (ring - 1), k = 0; start <= size - ring; ++start, ++k) {
+                    topRow[k] = squarelotron[ring - 1][start];
+                    leftColumn[k] = squarelotron[start][ring - 1];
+                    bottomRow[k] = squarelotron[size - ring][start];
+                    rightColumn[k] = squarelotron[start][size - ring];
                 }
 
-                squarelotron[i - 1] = leftColumn;
-                squarelotron[size - i] = rightColumn;
-
-                for (int j = 0; j < size; ++j) {
-                    squarelotron[j][i - 1] = bottomRow[j];
-                    squarelotron[j][size - i] = topRow[j];
+                for (int j = 0, start = ring - 1, end = size - ring; start <= size - ring; ++j, ++start, --end) {
+                    squarelotron[start][ring - 1] = bottomRow[j];
+                    squarelotron[start][size - ring] = topRow[j];
+                    squarelotron[ring - 1][end] = leftColumn[j];
+                    squarelotron[size - ring][end] = rightColumn[j];
                 }
             }
         }
