@@ -22,7 +22,7 @@ public class SquarelotronTest {
 
     @Test
     public void mainDiagonalFlip() throws Exception {
-        int [][] result;
+        int[][] result;
         for (int k = 3; k < MAX_SQUARELOTRON_DIMENSION; ++k) {
             Squarelotron squarelotron = new Squarelotron(k);
             int size = squarelotron.getSize();
@@ -33,7 +33,7 @@ public class SquarelotronTest {
                 for (int i = 0; i < size; ++i) {
 
                     for (int j = 0; j < size; ++j) {
-                        if ((j < ringNumber || j >= size - ringNumber) && (i < ringNumber || i >= size - ringNumber)) {
+                        if ((i >= ringNumber - 1 && i <= size - ringNumber) && (j >= ringNumber - 1 && j <= size - ringNumber)) {
                             assertEquals("Ring # " + ringNumber + " Size: " + size, i * size + j + 1, result[j][i]);
                         }
                     }
@@ -49,12 +49,10 @@ public class SquarelotronTest {
             int size = squarelotron.getSize();
             int ringLimit = (int) Math.ceil((double) squarelotron.getSize() / 2.0);
             for (int ringNumber = 1; ringNumber < ringLimit; ++ringNumber) {
-                squarelotron.rotateRight(ringNumber);
+                squarelotron.rotateRight(1);
                 for (int i = size - 1; i > -1; --i) {
                     for (int j = 0; j < size; ++j) {
-                        if ((j >= ringNumber - 1 || j <= size - ringNumber) && (i >= ringNumber || i <= size - ringNumber)) {
-                            assertEquals((size - 1 - i) * size + j + 1, squarelotron.getSquarelotron()[i][j]);
-                        }
+                        assertEquals((size - 1 - i) * size + j + 1, squarelotron.getSquarelotron()[i][j]);
                     }
                 }
             }
@@ -63,10 +61,10 @@ public class SquarelotronTest {
 
     private void checkUpsideDownFlip(int ringLimit, Squarelotron squarelotron, int size) {
         for (int ringNumber = 1; ringNumber < ringLimit; ++ringNumber) {
-            int [][] result = squarelotron.upsideDownFlip(ringNumber).getSquarelotron();
+            int[][] result = squarelotron.upsideDownFlip(ringNumber).getSquarelotron();
             for (int i = 0; i < size; ++i) {
                 for (int j = 0; j < size; ++j) {
-                    if ((j <= ringNumber - 1 || j >= size - ringNumber) && (i <= ringNumber || i <= size - ringNumber)) {
+                    if ((i >= ringNumber - 1 && i <= size - ringNumber) && (j >= ringNumber - 1 && j <= size - ringNumber)) {
                         assertEquals("Ring # " + ringNumber + " Size: " + size, (size - i - 1) * size + j + 1, result[i][j]);
                     }
                 }

@@ -1,6 +1,7 @@
 //Given a string s find the alphabetically last substring in the alphabetically ordered set of substrings of s
 
 public class Squarelotron {
+    private final int MAX_TURN = 4;
     private int[][] squarelotron;
 
     private int size;
@@ -38,11 +39,36 @@ public class Squarelotron {
         return new Squarelotron(result, size);
     }
 
-    /* Cases:
-       1. In diagonal
-       2. In ring touch it
-       3. Not in ring
-     */
+    //TODO This doesnt work for inner rings, fix it
+    public void rotateRight(int numberOfTurns) {
+        int trueTurns = numberOfTurns % MAX_TURN;
+        int ringLimit = (int) Math.ceil((double) size / 2.0);
+        int [] topRow, rightColumn, bottomRow, leftColumn;
+        for (int turn = 0; turn < trueTurns; ++turn) {
+            for (int i = 1; i <= ringLimit; ++i) {
+                topRow = new int[size - (2 * (i - 1))];
+                rightColumn = new int[size - (2 * (i - 1))];
+                bottomRow = new int[size - (2 * (i - 1))];
+                leftColumn = new int[size - (2 * (i - 1))];
+
+                for (int j = 0; j < size; ++j) {
+                    topRow[j] = squarelotron[i - 1][j];
+                    leftColumn[j] = squarelotron[j][i - 1];
+                    bottomRow[j] = squarelotron[size - i][j];
+                    rightColumn[j] = squarelotron[j][size - i];
+                }
+
+                squarelotron[i - 1] = leftColumn;
+                squarelotron[size - i] = rightColumn;
+
+                for (int j = 0; j < size; ++j) {
+                    squarelotron[j][i - 1] = bottomRow[j];
+                    squarelotron[j][size - i] = topRow[j];
+                }
+            }
+        }
+    }
+
     public Squarelotron mainDiagonalFlip(int ring) {
         int[][] result = new int[size][size];
         for (int i = 0; i < size; ++i) {
@@ -55,10 +81,6 @@ public class Squarelotron {
             }
         }
         return new Squarelotron(result, size);
-    }
-
-    public void rotateRight(int numberOfTurns) {
-
     }
 
     public int[][] getSquarelotron() {
