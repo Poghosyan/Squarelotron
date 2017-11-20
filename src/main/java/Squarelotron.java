@@ -39,6 +39,7 @@ public class Squarelotron {
         return new Squarelotron(result, size);
     }
 
+    //TODO fix so it works with negative rotations as well
     public void rotateRight(int numberOfTurns) {
         int trueTurns = numberOfTurns % MAX_TURN;
         int ringLimit = (int) Math.ceil((double) size / 2.0);
