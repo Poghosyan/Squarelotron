@@ -6,18 +6,14 @@ import static org.junit.Assert.*;
 public class SquarelotronTest {
 
     private final int MAX_SQUARELOTRON_DIMENSION = 8;
-    private int[][] sizeFourRotateOne;
-    private int[][] sizeFourRotateTwo;
-    private int[][] sizeFourRotateThree;
-    private int[][] sizeFourRotateFour;
     private int[][][] rotationHolder;
 
     @Before
     public void setUp() {
-        sizeFourRotateOne = new int[4][4];
-        sizeFourRotateTwo = new int[4][4];
-        sizeFourRotateThree = new int[4][4];
-        sizeFourRotateFour = new int[4][4];
+        int[][] sizeFourRotateOne = new int[4][4];
+        int[][] sizeFourRotateTwo = new int[4][4];
+        int[][] sizeFourRotateThree = new int[4][4];
+        int[][] sizeFourRotateFour = new int[4][4];
         rotationHolder = new int[4][][];
 
         for (int i = 0; i < 4; ++i) {
@@ -64,7 +60,6 @@ public class SquarelotronTest {
         }
     }
 
-    //TODO Fix test for both clockwise and counterclockwise rotations
     @Test
     public void rotateRight() throws Exception {
         for (int turns = 1; turns <= Squarelotron.MAX_TURN; ++turns) {
