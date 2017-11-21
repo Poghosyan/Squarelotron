@@ -39,9 +39,13 @@ public class Squarelotron {
         return new Squarelotron(result, size);
     }
 
-    //TODO fix so it works with negative rotations as well
     public void rotateRight(int numberOfTurns) {
         int trueTurns = numberOfTurns % MAX_TURN;
+
+        if (trueTurns < 0) {
+            trueTurns = MAX_TURN + trueTurns;
+        }
+
         int ringLimit = (int) Math.ceil((double) size / 2.0);
         int [] topRow, rightColumn, bottomRow, leftColumn;
 
@@ -74,7 +78,7 @@ public class Squarelotron {
         int[][] result = new int[size][size];
         for (int i = 0; i < size; ++i) {
             for (int j = 0; j < size; ++j) {
-                if ((i >= ring - 1 && i <= size - ring) && (j >= ring - 1 && j <= size - ring)) {
+                if ((i == ring - 1 || i == size - ring) || (j == ring - 1 || j == size - ring)) {
                     result[i][j] = squarelotron[j][i];
                 } else {
                     result[i][j] = squarelotron[i][j];
