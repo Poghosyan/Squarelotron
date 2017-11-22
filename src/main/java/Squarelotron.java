@@ -38,7 +38,7 @@ public class Squarelotron {
         }
         return new Squarelotron(result, size);
     }
-
+    //TODO Try to set up a transpose method and use it in rotateRight or do it in a different way
     public void rotateRight(int numberOfTurns) {
         int trueTurns = numberOfTurns % MAX_TURN;
 

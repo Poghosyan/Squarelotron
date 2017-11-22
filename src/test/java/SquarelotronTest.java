@@ -2,7 +2,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
-
+//TODO Reorganize code to have separate tests for each case that it would need to work with
 public class SquarelotronTest {
 
     private final int MAX_SQUARELOTRON_DIMENSION = 8;
