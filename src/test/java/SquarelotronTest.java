@@ -2,7 +2,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
-//TODO Reorganize code to have separate tests for each case that it would need to work with
 public class SquarelotronTest {
 
     private final int MAX_SQUARELOTRON_DIMENSION = 8;
@@ -59,11 +58,8 @@ public class SquarelotronTest {
                         } else {
                             assertEquals("Ring # " + ring + " Size: " + size, squarelotron.getSquarelotron()[j][i], result[j][i]);
                         }
-                        System.out.print(result[i][j] + " ");
                     }
-                    System.out.println();
                 }
-                System.out.println();
             }
         }
     }
@@ -91,19 +87,16 @@ public class SquarelotronTest {
             int[][] result = squarelotron.upsideDownFlip(ring).getSquarelotron();
             for (int i = 0; i < size; ++i) {
                 for (int j = 0; j < size; ++j) {
-                    System.out.print(result[i][j] + " ");
                     if ((i == ring - 1 && j >= ring - 1 && j <= size - ring) ||
                         (i == size - ring && j >= ring - 1 && j <= size - ring) ||
                         (j == ring - 1 && i >= ring - 1 && i <= size - ring) ||
                         (j == size - ring && i >= ring - 1 && i <= size - ring)) {
                         assertEquals("Ring # " + ring + " Size: " + size, (size - i - 1) * size + j + 1, result[i][j]);
                     } else {
-                        assertEquals("Ring # " + ring + " Size: " + size, squarelotron.getSquarelotron()[j][i], result[j][i]);
+                        assertEquals("Ring # " + ring + " Size: " + size, squarelotron.getSquarelotron()[i][j], result[i][j]);
                     }
                 }
-                System.out.println();
             }
-            System.out.println();
         }
     }
 
