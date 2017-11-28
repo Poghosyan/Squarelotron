@@ -1,4 +1,3 @@
-//Given a string s find the alphabetically last substring in the alphabetically ordered set of substrings of s
 
 public class Squarelotron {
     public static final int MAX_TURN = 4;
@@ -6,6 +5,9 @@ public class Squarelotron {
 
     private int size;
 
+    /**
+     * @param n Dimension of array
+     */
     public Squarelotron(int n) {
         squarelotron = new int[n][n];
         size = n;
@@ -17,11 +19,21 @@ public class Squarelotron {
         }
     }
 
+    /**
+     * A copy constructor
+     * @param sq the 2D array within the squarelotron being copied
+     * @param size size of squarelotron being copied
+     */
     public Squarelotron(int[][] sq, int size) {
         squarelotron = sq;
         this.size = size;
     }
 
+    /**
+     * Flips the ring of the 2D array within the squarelotron but does not change the underlying array
+     * @param ring The ring number which should be flipped
+     * @return a Squarelotron with the inverted ring
+     */
     public Squarelotron upsideDownFlip(int ring) {
         int[][] result = new int[size][size];
         for (int i = 0; i < size; ++i) {
@@ -38,7 +50,12 @@ public class Squarelotron {
         }
         return new Squarelotron(result, size);
     }
-    //TODO Try to set up a transpose method and use it in rotateRight or do it in a different way
+
+    /**
+     * Rotates the Squarelotron 90 degrees clockwise, a negative number would indicate a counterclockwise rotation.
+     * This method changes the underlying squarelotron.
+     * @param numberOfTurns number of times the squarelotron should be rotated
+     */
     public void rotateRight(int numberOfTurns) {
         int trueTurns = numberOfTurns % MAX_TURN;
 
@@ -74,6 +91,11 @@ public class Squarelotron {
         }
     }
 
+    /**
+     * Flips the specified ring diagonally.
+     * @param ring The ring which should be flipped diagonally
+     * @return A Squarelotron with the ring that is flipped.
+     */
     public Squarelotron mainDiagonalFlip(int ring) {
         int[][] result = new int[size][size];
         for (int i = 0; i < size; ++i) {
